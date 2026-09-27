@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>ASTM E1300 Glass Calculator V7</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="wrap">
+  <section class="card hero">
+    <div class="brand">CS ECO GLASS</div>
+    <h1>ASTM E1300 Glass Calculator V7</h1>
+    <p>Automatic NFL + GTF + LSF with ASTM figure/table evidence and highlighted results.</p>
+  </section>
+
+  <section class="card">
+    <h2>Panel</h2>
+    <div class="grid3">
+      <label>Assembly
+        <select id="assembly">
+          <option value="igu">Double glazing IGU</option>
+          <option value="single">Single lite / Inner only</option>
+        </select>
+      </label>
+      <label>Width (mm)<input id="width" type="number" value="2000" min="1"></label>
+      <label>Height (mm)<input id="height" type="number" value="2800" min="1"></label>
+      <label>Load duration
+        <select id="duration">
+          <option value="short">Short duration ≤ 3 s</option>
+          <option value="long">Long duration ≈ 30 days</option>
+        </select>
+      </label>
+      <label>Support
+        <select id="support">
+          <option value="4">4 sides continuously supported</option>
+          <option value="3">3 sides continuously supported</option>
+          <option value="2">2 opposite sides supported</option>
+          <option value="1">1 side / cantilever</option>
+        </select>
+      </label>
+      <label id="edgeBox" class="hidden">2-side supported edges
+        <select id="supportedEdges">
+          <option value="lr">Left / Right supported</option>
+          <option value="tb">Top / Bottom supported</option>
+        </select>
+      </label>
+      <label id="oneEdgeBox" class="hidden">1-side supported edge
+        <select id="oneSupportedEdge">
+          <option value="left">Left edge supported</option>
+          <option value="right">Right edge supported</option>
+          <option value="top">Top edge supported</option>
+          <option value="bottom">Bottom edge supported</option>
+        </select>
+      </label>
+    </div>
+  </section>
+
+  <section class="lites">
+    <div id="outerCard" class="card">
+      <h2>Outer Lite</h2>
+      <div id="outerFields"></div>
+    </div>
+    <div class="card">
+      <h2>Inner Lite</h2>
+      <div id="innerFields"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="actions">
+      <button id="example1" class="secondary">ASTM A3.1: 6 mm / 1200×1500</button>
+      <button id="example2" class="secondary">Report: 6 mm / 2000×2800</button>
+      <button id="calc" class="primary">Calculate ASTM</button>
+    </div>
+  </section>
+
+  <section id="results" class="card hidden">
+    <h2>ASTM Results</h2>
+    <div id="resultCards" class="resultCards"></div>
+  </section>
+
+  <section id="viewer" class="card hidden">
+    <div class="viewerHead">
+      <div>
+        <h2>ASTM Evidence</h2>
+        <div id="chartSubtitle" class="muted"></div>
+      </div>
+      <div class="toggle">
+        <button id="showOuter" class="secondary">Outer</button>
+        <button id="showInner" class="secondary">Inner</button>
+      </div>
+    </div>
+
+    <div class="evidenceTabs">
+      <button id="evNFL" class="secondary evidenceActive">NFL Figure</button>
+      <button id="evGTF" class="secondary">GTF Table</button>
+      <button id="evLSF" class="secondary">LSF Table</button>
+    </div>
+
+    <div id="nflEvidence">
+      <div class="chartWrap">
+        <img id="chartImg" alt="ASTM E1300 NFL chart">
+        <canvas id="overlay"></canvas>
+      </div>
+
+      <div class="legend">
+        <span><i class="dot point"></i> Panel size / intersection</span>
+        <span><i class="dot ar"></i> Dimension / AR guide</span>
+        <span><i class="dot contour"></i> Highlighted ASTM line</span>
+      </div>
+    </div>
+
+    <div id="tableEvidence" class="hidden"></div>
+
+    <div id="chartNote" class="notice"></div>
+
+    <!-- original closing structure continued -->
+    <div class="hidden">
+    </div>
+    </div>
+  </section>
+
+  <section class="card small">
+    V7 keeps the V6.3 NFL engine and adds ASTM GTF and LSF modules. GTF is taken from ASTM Tables 1–3.
+    IGU LSF uses the ASTM Appendix X3 stiffness basis and identifies Table 5 / Table 6 applicability.
+    For Double IGU, the ASTM basic procedure is intended for four-side continuous support; other support selections are flagged in the results.
+  </section>
+</main>
+
+<script src="astm-data.js"></script>
+<script src="nfl-engine.js"></script>
+<script src="astm-factors.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
